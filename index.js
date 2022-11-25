@@ -45,6 +45,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
             } else if (interaction.commandName === "fandrew") {
                 await interaction.reply("Fuck you Top G");
             } else if (interaction.commandName === "forcestart" && interaction.member.id === process.env.ADMIN) {
+                clearInterval(countdown);
                 startMath();
                 await interaction.reply("**FORCEFULLY** started class.");
             }
