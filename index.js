@@ -11,6 +11,10 @@ const commands = [
     {
         name: "fandrew",
         description: "Does a thing..."
+    },
+    {
+        name: "forcestart",
+        description: "Force Starts Math class"
     }
 ]
 
@@ -40,17 +44,12 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
                 await interaction.reply("Marked math as done.");
             } else if (interaction.commandName === "fandrew") {
                 await interaction.reply("Fuck you Top G");
+            } else if (interaction.commandName === "forcestart" && interaction.member.id === process.env.ADMIN) {
+                startMath();
             }
         });
 
-        const rule = new schedule.RecurrenceRule();
-        rule.tz = "America/Vancouver";
-        rule.second = 0;
-        rule.minute = 30;
-        rule.hour = 13;
-        rule.dayOfWeek = 5;
-
-        schedule.scheduleJob(rule, async () => {
+        const startMath = async () => {
             console.log("Class has started.");
             const targetChannel = client.channels.cache.get(process.env.TARGET);
             await targetChannel.send("The countdown begins...");
@@ -82,7 +81,16 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
                 console.log(`${hours} ${minutes}`);
             }, 60 * 1000);
-        });
+        }
+
+        const rule = new schedule.RecurrenceRule();
+        rule.tz = "America/Vancouver";
+        rule.second = 0;
+        rule.minute = 30;
+        rule.hour = 13;
+        rule.dayOfWeek = 5;
+
+        schedule.scheduleJob(rule, startMath);
 
         client.login(process.env.BOT_TOKEN);
     } catch (error) {
