@@ -56,7 +56,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
                 const now = new Date().getTime();
                 const diffMs = end - now;
 
-                const hours = Math.round(diffMs / (60 * 60 * 1000));
+                const hoursMS = Math.round(diffMs / (60 * 60 * 1000));
+                let hours = hoursMS < 0 ? Math.ciel(hoursMS) : Math.floor(hoursMS);
                 const minutes = Math.round(diffMs / (60 * 1000)) % 60;
 
                 if (hours > 0) {
