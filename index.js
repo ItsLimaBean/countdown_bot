@@ -61,7 +61,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
                 const minutes = Math.round(diffMs / (60 * 1000)) % 60;
 
                 if (hours > 0) {
-                    await targetChannel.send(minutes === 0 ? `Math ends in ${hours} hour(s).` : `Math ends in ${hours} hour(s) and ${minutes} minute(s).`);
+                    await targetChannel.send(minutes === 0 ? `Math ends in ${hours+1} hour(s).` : `Math ends in ${hours} hour(s) and ${minutes} minute(s).`);
                 } else if (hours == 0 && minutes > 0) {
                     await targetChannel.send(`Math ends in ${minutes} minute(s)!`);
                 } else if (hours == 0 && minutes == 0) {
@@ -69,7 +69,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
                 } else if (hours == 0 && minutes < 0) {
                     await targetChannel.send(`Math has gone over by ${Math.abs(minutes)} minute(s)`);
                 } else if (hours < 0) {
-                    await targetChannel.send(minutes === 0 ?  `Math has gone over by ${Math.abs(hours)} hour(s) :(` : `Math has gone over by ${Math.abs(hours)} hour(s) and ${Math.abs(minutes)} minute(s) :(`);
+                    await targetChannel.send(minutes === 0 ?  `Math has gone over by ${Math.abs(hours+1)} hour(s) :(` : `Math has gone over by ${Math.abs(hours)} hour(s) and ${Math.abs(minutes)} minute(s) :(`);
                 } else {
                     await targetChannel.send("liam broke something :)");
                 }
