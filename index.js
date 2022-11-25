@@ -7,6 +7,10 @@ const commands = [
     {
         name: "classdone",
         description: "Marks Math class as done."
+    },
+    {
+        name: "fandrew",
+        description: "Does a thing..."
     }
 ]
 
@@ -19,7 +23,7 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
         let countdown;
         console.log("Started refreshing application (/) commands.");
 
-       // await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: commands });
+       await rest.put(Routes.applicationCommands(process.env.CLIENT_ID), { body: commands });
 
         console.log("Successfully reloaded application (/) commands.");
     
@@ -34,6 +38,8 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
             if (interaction.commandName === "classdone") {
                 clearInterval(countdown);
                 await interaction.reply("Marked math as done.");
+            } else if (interaction.commandName === "fandrew") {
+                await interaction.reply("Fuck you Top G");
             }
         });
 
